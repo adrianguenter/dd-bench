@@ -47,7 +47,7 @@ function read_bench {
 
   dest="/dev/zero"
 
-  out=$(dd if=${src} of=${dest} iflag=direct bs=${bs} count=${count} 2>&1 | grep -v records)
+  out=$(dd if=${src} of=${dest} iflag=direct,dsync bs=${bs} count=${count} 2>&1 | grep -v records)
   # Parse out total data
   total=$(echo ${out} | sed 's/.*(\(.*B\)).*/\1/')
   speed=$(echo ${out} | sed 's/.*, \(.*B\/s\)/\1/')
